@@ -1,31 +1,96 @@
+# Übungsblatt 1 – Lösung
+
 ## Aufgabe 1.1 Sicherheitsziele identifizieren
 
 ### a)
 
-Patientendaten.Vertraulichkeit : Patientendaten enthalten personenbezogene Informationen wie Namen, Geburtsdaten, Adressen sowie medizinische Diagnosen und Befunde. Wir nehmen ann, dass diese Daten im vorliegenden Szenario auf einem zentralen Server gespeichert sind und der Zugriff grundsätzlich nur autorisierten Personen (Ärzten, Pflegekräften, etc) gestattet bzw. ermöglicht ist. Eine Bedrohung entsteht dann, wenn ein Angreifer beispielsweise durch gestohlene Zugangsdaten oder das Ausnutzen einer Sicherheitslücke des Servers unberechtigt Zugriff auf die Daten erlangt und letztendlich so die Patientendaten einsehen kann. Dies stellt eine Bedrohung dar, da die medizinischen Informationen sowie die persönlichen Daten einzelne Personen eindeutig identifizieren können und Rückschlüsse auf den Gesundheitszustand dieser ermöglichen. Ein Angreifer hat somit die Möglichkeit diese vertraulichen Informationen offenzulegen. Dadurch ist die Vertraulichkeit der Patientendaten verletzt.
+**Patientendaten.Vertraulichkeit :**
 
-Trainingsdaten.Integrität : Wir nehmen an, dass das KI-Modell mit einem Trainingsdatensatz aus CT-Aufnahmen und den zugehörigen Labels besteht. Die Labels geben dabei an, welcher Befund auf der Aufnahme zu erkennen ist, also beispielsweise ein Tumor, andere Erkrankungen oder kein Befund. Zudem nehmen wir an, dass Schreibzugriff auf die Daten und die Labels möglich ist und die Zuordnung von Labels zu Aufnahmen vor dem Training des Modells nicht regelmäßig überprüft wird. Dadurch könnte ein Angreifer die Trainingsdaten gezielt manipulieren, indem er beispielsweise Labels fälscht oder anders zuordnet wodurch positive Befunde fälschlicherweise als negativ also gesund gekennzeichnet werden. Das KI-Modell kann dadurch falsche Zusammenhänge lernen und in der Anwendung keine zuverlässigen Prognosen bzw. Diagnosen liefern. Da die Trainingsdaten gezielt durch einen Angreifer verändert werden können und dadurch das Verhalten des KI-Modells beeinflusst werden kann, stellt dieses Szenario eine Bedrohung der Integrität des Trainingsdatensatzes dar.
+- **Annahmen**
+  - Die Patientendaten enthalten personenbezogene Informationen wie Namen, Geburtsdaten und Adressen sowie medizinische Diagnosen und Befunde.
+  - Die Daten sind im vorliegenden Szenario auf einem zentralen Server gespeichert.
+  - Der Zugriff ist grundsätzlich nur autorisierten Personen (Ärzten, Pflegekräften etc.) gestattet bzw. ermöglicht.
+- **Bedrohung:** Ein Angreifer erlangt beispielsweise durch gestohlene Zugangsdaten oder das Ausnutzen einer Sicherheitslücke des Servers unberechtigt Zugriff auf die Daten und kann so die Patientendaten einsehen.
+- **Begründung:** Dies stellt eine Bedrohung dar, da die medizinischen Informationen sowie die persönlichen Daten einzelne Personen eindeutig identifizieren können und Rückschlüsse auf deren Gesundheitszustand ermöglichen. Ein Angreifer hat somit die Möglichkeit, diese vertraulichen Informationen offenzulegen. Dadurch ist die Vertraulichkeit der Patientendaten verletzt.
 
-Modellergebnisse.Integrität : Wir nehmen an, dass das KI-Modell nach dem Training im alltäglichen Betrieb in einem Krankenhaus eingesetzt wird, damit CT-Aufnahmen automatisch analysiert und die Ärzte bei der Diagnose von Patienten unterstützt werden. Die Modellergebnisse sowie die CT-Aufnahme werden dabei digital gespeichert und dem Krankenhaus über einen zentralen Server zur Verfügung gestellt werden. Zudem nehmen wir an, dass ein Angreifer aufgrund einer Sicherheitslücke die Möglichkeit hat, auf die gespeicherten Ergebnisse des Models zuzugreifen und diese zu verändern. Er könnte dadurch einen auffälligen Befund durch einen unauffälligen ersetzten und somit die Ergebnisse des Modells verfälschen. Dadurch würden die Ärzte falsche Informationen erhalten und falsche Entscheidungen in Bezug auf die Versorgung der Patienten treffen. Somit ist die Integrität der Modellergebnisse verletzt, da die ursprünglichen Ergebnisse des KI-Modells nachträglich manipuliert wurden und nicht gewährleistet wurde, dass die Daten nur von autorisierten Personen geändert/gelöscht werden dürfen.
+**Trainingsdaten.Integrität :**
+
+- **Annahmen**
+  - Das KI-Modell wird mit einem Trainingsdatensatz aus CT-Aufnahmen und den zugehörigen Labels trainiert. Die Labels geben an, welcher Befund auf der Aufnahme zu erkennen ist, also beispielsweise ein Tumor, andere Erkrankungen oder kein Befund.
+  - Schreibzugriff auf die Daten und die Labels ist möglich.
+  - Die Zuordnung von Labels zu Aufnahmen wird vor dem Training des Modells nicht regelmäßig überprüft.
+- **Bedrohung:** Ein Angreifer manipuliert die Trainingsdaten gezielt, indem er beispielsweise Labels fälscht oder anders zuordnet, wodurch positive Befunde fälschlicherweise als negativ, also gesund, gekennzeichnet werden.
+- **Begründung:** Das KI-Modell kann dadurch falsche Zusammenhänge lernen und in der Anwendung keine zuverlässigen Prognosen bzw. Diagnosen liefern. Da die Trainingsdaten gezielt durch einen Angreifer verändert werden können und dadurch das Verhalten des KI-Modells beeinflusst werden kann, stellt dieses Szenario eine Bedrohung der Integrität des Trainingsdatensatzes dar.
+
+**Modellergebnisse.Integrität :**
+
+- **Annahmen**
+  - Das KI-Modell wird nach dem Training im alltäglichen Betrieb in einem Krankenhaus eingesetzt, damit CT-Aufnahmen automatisch analysiert und Ärzte bei der Diagnose von Patienten unterstützt werden.
+  - Die Modellergebnisse sowie die CT-Aufnahme werden digital gespeichert und dem Krankenhaus über einen zentralen Server zur Verfügung gestellt.
+  - Ein Angreifer hat aufgrund einer Sicherheitslücke die Möglichkeit, auf die gespeicherten Ergebnisse des Modells zuzugreifen und diese zu verändern.
+- **Bedrohung:** Der Angreifer ersetzt einen auffälligen Befund durch einen unauffälligen und verfälscht somit die Ergebnisse des Modells.
+- **Begründung:** Die Ärzte würden falsche Informationen erhalten und falsche Entscheidungen in Bezug auf die Versorgung der Patienten treffen. Die Integrität der Modellergebnisse ist verletzt, da die ursprünglichen Ergebnisse des KI-Modells nachträglich manipuliert wurden und nicht gewährleistet wurde, dass die Daten nur von autorisierten Personen geändert/gelöscht werden dürfen.
 
 ### b)
 
-Trainingsdaten.Authentizität : Das KI-Modell wird mit frei verfügbaren Datensätzen aus dem Internet trainiert. Wir nehmen dabei an, dass diese von verschiedenen externen Anbietern veröffentlicht werden. Zudem nehmen wir an, dass die verwendeten Datensätze vom Unternehmen nicht zuverlässig auf ihre Herkunft geprüft werden. Ein Angreifer hat dadurch die Möglichkeit, eine grundsätzlich vertrauenswürdige Quelle zu imitieren und dadurch gefälschte Datensätze zur Verfügung zu stellen. Das Unternehmen würde dadurch fälschlicherweise davon ausgehen, dass die Trainingsdaten aus einer vertrauenswürdigen Quelle stammen und diese für das Training des KI-Modells verwenden. Wenn die tatsächliche Herkunft der Daten aber nicht mit der angegebenen Herkunft der Daten übereinstimmt, kann die Echtheit nicht gewährleistet werden bzw. eindeutig zugeordnet werden und das Sicherheitsziel der Authentizität wird verletzt.
+**Trainingsdaten.Authentizität :**
 
-Verkehrsschilderkennung.Verfügbarkeit : Wir nehmen an, dass das autonome Fahrzeug das KI-Modell bereits zur Verkehrsschilderkennung verwendet. Für die Ausführung von Prozessen des Modells muss dieses auf einem entsprechenden Rechner im Fahrzeug laufen. Wir gehen davon aus, dass dieser nur begrenzt Rechenkapazität besitzt und bei Überlastung das Erkennungssystem zeitweise nicht verwendet werden kann bzw. vollständig ausfällt. Ein Angreifer könnte somit auf bestimmte Prozesse des Fahrzeugrechners zugreifen und dessen Rechenkapazität überlasten. Folglich werden Verkehrsschilder nicht mehr rechtzeitig erkannt oder das System fällt vollständig aus. Da die Erkennung der Verkehrsschilder ein essentieller Teil der Funktionsweise eines autonomen Fahrzeugs ist stellt ein Ausfall dieses Systems eine Gefahr für den Verkehr und die Sicherheit anderer Verkehrsteilnehmer dar. Weil die Verkehrsschilderkennung im beschriebenen Fall nicht mehr zur Nutzung zur Verfügung steht, wäre das Sicherheitsziel der Verfügbarkeit verletzt.
+- **Annahmen**
+  - Das KI-Modell wird mit frei verfügbaren Datensätzen aus dem Internet trainiert.
+  - Diese Datensätze werden von verschiedenen externen Anbietern veröffentlicht.
+  - Die verwendeten Datensätze werden vom Unternehmen nicht zuverlässig auf ihre Herkunft geprüft.
+- **Bedrohung:** Ein Angreifer imitiert eine grundsätzlich vertrauenswürdige Quelle und stellt dadurch gefälschte Datensätze zur Verfügung. Das Unternehmen geht fälschlicherweise davon aus, dass die Trainingsdaten aus einer vertrauenswürdigen Quelle stammen, und verwendet sie für das Training des KI-Modells.
+- **Begründung:** Wenn die tatsächliche Herkunft der Daten nicht mit der angegebenen Herkunft übereinstimmt, kann die Echtheit nicht gewährleistet bzw. die Daten können nicht eindeutig zugeordnet werden. Damit wird das Sicherheitsziel der Authentizität verletzt.
 
-Kameradaten.Schutz der Privatsphäre : Wir nehmen an, dass die öffentlich verfügbaren Trainingsdatensätze nicht nur reine Verkehrsschilder enthalten, sondern auch tatsächliche Verkehrs- und Straßenaufnahmen, auf denen zusätzlich Personen, Fahrzeuge und Kennzeichen zu erkennen sind und Personen anhand dieser Merkmale und Informationen eindeutig identifizierbar sind. Zudem nehmen wir an, dass das Unternehmen diese Datensätze herunterlädt und die vollständigen Aufnahmen für das training ihres KI-Modells verwendet ohne diese vorher zusätzlich zu anonymisieren, obwohl die Erkennung der Merkmale von Fahrzeugen und Personen für die eigentliche Verkehrsschilderkennung nicht nötig ist. Weitere Annahmen bestehen darin, dass das Unternehmen die heruntergeladenen Dateien auf eigenen Servern speichert und diese auch nach dem Training dort noch zur Verfügung stehen. Dadurch besteht die Gefahr, dass das Unternehmen die Daten für andere Zwecke verwendet oder Mitarbeiter des Unternehmens auf diese Informationen zugreifen. Da das Unternehmen dadurch personenbezogene Daten verarbeitet und speichert, die für den eigentlichen Trainingszweck des Modells nicht benötigt werden und zudem keine Zustimmung der Personen in den Videos zur Verarbeitung ihrer Daten besteht, wäre der Schutz der Privatsphäre der betroffenen Personen gefährdet.
+**Verkehrsschilderkennung.Verfügbarkeit :**
+
+- **Annahmen**
+  - Das autonome Fahrzeug verwendet das KI-Modell bereits zur Verkehrsschilderkennung.
+  - Das Modell läuft auf einem entsprechenden Rechner im Fahrzeug, der nur begrenzte Rechenkapazität besitzt.
+  - Bei Überlastung kann das Erkennungssystem zeitweise nicht verwendet werden bzw. fällt vollständig aus.
+- **Bedrohung:** Ein Angreifer greift auf bestimmte Prozesse des Fahrzeugrechners zu und überlastet dessen Rechenkapazität. Folglich werden Verkehrsschilder nicht mehr rechtzeitig erkannt oder das System fällt vollständig aus.
+- **Begründung:** Die Erkennung der Verkehrsschilder ist ein essentieller Teil der Funktionsweise eines autonomen Fahrzeugs. Ein Ausfall dieses Systems stellt eine Gefahr für den Verkehr und die Sicherheit anderer Verkehrsteilnehmer dar. Weil die Verkehrsschilderkennung nicht mehr zur Nutzung zur Verfügung steht, ist das Sicherheitsziel der Verfügbarkeit verletzt.
+
+**Kameradaten.Schutz der Privatsphäre :**
+
+- **Annahmen**
+  - Die öffentlich verfügbaren Trainingsdatensätze enthalten nicht nur reine Verkehrsschilder, sondern auch tatsächliche Verkehrs- und Straßenaufnahmen, auf denen zusätzlich Personen, Fahrzeuge und Kennzeichen zu erkennen sind. Personen sind anhand dieser Merkmale und Informationen eindeutig identifizierbar.
+  - Das Unternehmen lädt diese Datensätze herunter und verwendet die vollständigen Aufnahmen für das Training seines KI-Modells, ohne sie vorher zu anonymisieren, obwohl die Erkennung der Merkmale von Fahrzeugen und Personen für die eigentliche Verkehrsschilderkennung nicht nötig ist.
+  - Das Unternehmen speichert die heruntergeladenen Dateien auf eigenen Servern, wo sie auch nach dem Training noch zur Verfügung stehen.
+  - Es besteht keine Zustimmung der Personen auf den Aufnahmen zur Verarbeitung ihrer Daten.
+- **Bedrohung:** Das Unternehmen verwendet die Daten für andere Zwecke oder Mitarbeiter des Unternehmens greifen auf diese Informationen zu.
+- **Begründung:** Das Unternehmen verarbeitet und speichert personenbezogene Daten, die für den eigentlichen Trainingszweck des Modells nicht benötigt werden. Der Schutz der Privatsphäre der betroffenen Personen ist dadurch gefährdet.
 
 ### c)
 
-Mitarbeiterfotos.Vertraulichkeit : Wir nehmen an, dass das Unternehmen die Gesichtsfotos seiner Mitarbeiter in einer zentralen Datenbank speichert, für das Training des KI-Modells verwendet und diese anschließend aber nicht wieder löscht. Die gespeicherten Bilder sind dabei den einzelnen Mitarbeitern eindeutig zugeordnet, wodurch eine Identifizierung möglich ist. Die Datenbank ist dabei über die Systeme des Unternehmens erreichbar wobei der Zugriff grundsätzlich nur autorisierten Personen gestattet ist. Ein Angreifer hat trotzdem die Möglichkeit über Sicherheitslücken oder gestohlene Zugangsdaten Zugriff auf die Datenbank zu erlangen. Dies stellt eine Bedrohung dar, da es sich bei den Fotos um personenbezogene Daten und vor allem biometrische Daten handelt, wodurch diese sehr sensibel sind, da sie sich im Gegensatz zu beispielsweise Passwörtern und Zugangsdaten nicht ändern lassen. Die gestohlenen Fotos könnten für Identitätsfälschung verwendet werden. Durch die unberechtigte Offenlegung der biometrischen Daten wäre deren Vertraulichkeit verletzt.
+**Mitarbeiterfotos.Vertraulichkeit :**
 
-Gesichtserkennung.Authentizität : Der Zutritt zu den Bürogebäuden des Unternehmens wir per Gesichtserkennung gesteuert, wobei wir davon ausgehen, dass das Terminal an der Eingangstür für alle frei erreichbar ist und das das KI-Modell bei der Kontrolle nur ein einfaches Bild auswertet ohne eine Lebenderkennung. Dadurch nehmen wir an, dass das KI-Modell nicht wirklich zwischen einer lebenden Person, einem Hand-Bild oder einem Ausdruck des Bildes unterscheiden kann. Ein Angreifer hätte somit die Möglichkeit ein Foto eines Mitarbeiters beispielsweise aus den sozialen Medien zu verwenden und sich somit Zugang zu den Gebäuden zu verschaffen, da das Modell eine hohe Ähnlichkeit zwischen dem vorgehaltenen Bild und dem hinterlegten Bild erkennt. Dies stellt eine hohe Bedrohung da, weil der Angriff theoretisch ohne große technische Vorkenntnisse durchgeführt werden kann und die Schwäche im KI-System liegt, da das Modell nur auf Ähnlichkeit prüft. Dadurch ist die Authentizität des Systems verletzt, da die Echtheit der angenommenen Identität nicht gewährleistet wäre.
+- **Annahmen**
+  - Das Unternehmen speichert die Gesichtsfotos seiner Mitarbeiter in einer zentralen Datenbank, verwendet sie für das Training des KI-Modells und löscht sie anschließend nicht wieder.
+  - Die gespeicherten Bilder sind den einzelnen Mitarbeitern eindeutig zugeordnet, wodurch eine Identifizierung möglich ist.
+  - Die Datenbank ist über die Systeme des Unternehmens erreichbar. Der Zugriff ist grundsätzlich nur autorisierten Personen gestattet.
+- **Bedrohung:** Ein Angreifer erlangt über Sicherheitslücken oder gestohlene Zugangsdaten Zugriff auf die Datenbank. Die gestohlenen Fotos könnten für Identitätsfälschung verwendet werden.
+- **Begründung:** Bei den Fotos handelt es sich um personenbezogene und vor allem biometrische Daten, wodurch diese sehr sensibel sind, da sie sich im Gegensatz zu beispielsweise Passwörtern und Zugangsdaten nicht ändern lassen. Durch die unberechtigte Offenlegung der biometrischen Daten wäre deren Vertraulichkeit verletzt.
 
-Zugangskontrolle.Autorisierung : Wir nehmen an, dass das Unternehmen das System zur Gesichtserkennung nicht nur an den Haupteingängen verwendet, sondern auch innerhalb des Gebäudes für unterschiedliche Bereiche. Unterschiedliche Mitarbeiter sollend im Szenario unterschiedliche Zutrittsberechtigungen haben und das System muss neben der reinen Gesichtserkennung auch die Zutrittsberechtigungen der einzelnen Personen überprüfen. Ist das System falsch konfiguriert oder ändert sich die Konfiguration unvorhergesehen könnte es dazu kommen das die Prüfung der Zugangsberechtigung nicht mehr durchgeführt wird und nur geprüft wird, ob die erkannte Person grundsätzlich ein Mitarbeiter ist. Dies stellt ein Risiko dar, da unberechtigte Personen Zugang zu nicht für sie freigegebenen Bereichen erlangen könnten. Da das KI-Modell zwar eine Person korrekt identifiziert hat, aber ihre Zugangsberechtigung nicht überprüft hat, wäre das Sicherheitsziel der Autorisierung verletzt.
+**Gesichtserkennung.Authentizität :**
+
+- **Annahmen**
+  - Der Zutritt zu den Bürogebäuden des Unternehmens wird per Gesichtserkennung gesteuert.
+  - Das Terminal an der Eingangstür ist für alle frei erreichbar.
+  - Das KI-Modell wertet bei der Kontrolle nur ein einfaches Bild aus, ohne eine Lebenderkennung. Es kann daher nicht wirklich zwischen einer lebenden Person, einem Handy-Bild oder einem Ausdruck des Bildes unterscheiden.
+- **Bedrohung:** Ein Angreifer verwendet ein Foto eines Mitarbeiters, beispielsweise aus den sozialen Medien, und verschafft sich damit Zugang zu den Gebäuden, da das Modell eine hohe Ähnlichkeit zwischen dem vorgehaltenen Bild und dem hinterlegten Bild erkennt.
+- **Begründung:** Dies stellt eine hohe Bedrohung dar, weil der Angriff theoretisch ohne große technische Vorkenntnisse durchgeführt werden kann und die Schwäche im KI-System liegt, da das Modell nur auf Ähnlichkeit prüft. Dadurch ist die Authentizität des Systems verletzt, da die Echtheit der angenommenen Identität nicht gewährleistet wäre.
+
+**Zugangskontrolle.Autorisierung :**
+
+- **Annahmen**
+  - Das Unternehmen verwendet das System zur Gesichtserkennung nicht nur an den Haupteingängen, sondern auch innerhalb des Gebäudes für unterschiedliche Bereiche.
+  - Unterschiedliche Mitarbeiter haben unterschiedliche Zutrittsberechtigungen. Das System muss neben der reinen Gesichtserkennung auch die Zutrittsberechtigungen der einzelnen Personen überprüfen.
+- **Bedrohung:** Ist das System falsch konfiguriert oder ändert sich die Konfiguration unvorhergesehen, könnte die Prüfung der Zugangsberechtigung nicht mehr durchgeführt werden und es würde nur geprüft, ob die erkannte Person grundsätzlich ein Mitarbeiter ist. Dadurch könnten unberechtigte Personen Zugang zu nicht für sie freigegebenen Bereichen erlangen.
+- **Begründung:** Das KI-Modell hat zwar eine Person korrekt identifiziert, aber ihre Zugangsberechtigung nicht überprüft. Damit wäre das Sicherheitsziel der Autorisierung verletzt.
 
 ## Aufgabe 1.4
 
 ### a)
 
-Das Ziel von Technikfolgenabschätzung besteht darin,  systematisch zu Untersuchen und zu Bewerten, welche Auswirkungen Technologien sowohl auf Menschen, als auch auf Gesellschaft, Wirtschaft und Umwelt haben. Dabei sollen sowohl Chancen als auch Risiken frühzeitig identifiziert werden und als Orientierung für Entscheidungsträger dienen. Ziel ist es durch die Technikfolgenabschätzung mögliche Gefahren in Zusammenhang mit technischen Innovationen und Systemen zu minimieren und zudem eine Grundlage für eine verantwortungsvolle Verwendung neuer Technologien zu entwickeln. Dabei werden nicht nur unmittelbare Auswirkungen analysiert, sonder auch langfristige Folgen berücksichtigt. Es geht im Grunde als darum, dass man die möglichen Konsequenzen von neuen oder auch bestehenden Technologien versteht und analysiert, bevor sie unkontrolliert eingesetzt werden.
+Das Ziel von Technikfolgenabschätzung besteht darin, systematisch zu untersuchen und zu bewerten, welche Auswirkungen Technologien sowohl auf Menschen als auch auf Gesellschaft, Wirtschaft und Umwelt haben. Dabei sollen sowohl Chancen als auch Risiken frühzeitig identifiziert werden und als Orientierung für Entscheidungsträger dienen. Ziel ist es, durch die Technikfolgenabschätzung mögliche Gefahren in Zusammenhang mit technischen Innovationen und Systemen zu minimieren und zudem eine Grundlage für eine verantwortungsvolle Verwendung neuer Technologien zu entwickeln. Dabei werden nicht nur unmittelbare Auswirkungen analysiert, sondern auch langfristige Folgen berücksichtigt. Es geht im Grunde also darum, dass man die möglichen Konsequenzen von neuen oder auch bestehenden Technologien versteht und analysiert, bevor sie unkontrolliert eingesetzt werden.
